@@ -1,5 +1,129 @@
 package ru.netology
 
+
+interface Attachment {
+    val type: String
+}
+
+data class Audio(
+    val id: Int,
+    val ownerId: Int,
+    val artist: String,
+    val title: String,
+    val duration: Int,
+    val url: String,
+    val lyricsId: Int,
+    val albumId: Int,
+    val genreId: Int,
+    val date: Int,
+    val noSearch: Int,
+    val lsHq: Int
+)
+
+data class AudioAttachment(
+    override val type: String = "audio",
+    val id: Int,
+    val ownerId: Int,
+    val artist: String,
+    val title: String,
+    val duration: Int,
+    val url: String,
+    val lyricsId: Int,
+    val albumId: Int,
+    val genreId: Int,
+    val date: Int,
+    val noSearch: Int,
+    val lsHq: Int,
+    val audioAttachment: Audio = Audio(
+        id,
+        ownerId,
+        artist,
+        title,
+        duration,
+        url,
+        lyricsId,
+        albumId,
+        genreId,
+        date,
+        noSearch,
+        lsHq
+    )
+) : Attachment
+
+data class App(
+    val id: Int,
+    val name: String,
+    val photo130: String,
+    val photo604: String
+)
+
+data class AppAttachment(
+    override val type: String = "app",
+    val id: Int,
+    val name: String,
+    val photo130: String,
+    val photo604: String,
+    val appAttachment: App = App(id, name, photo130, photo604)
+) : Attachment
+
+data class Graffiti(
+    val id: Int,
+    val ownerId: Int,
+    val photo130: String,
+    val photo604: String
+)
+
+data class GraffitiAttachment(
+    override val type: String = "graffiti",
+    val id: Int,
+    val ownerId: Int,
+    val photo130: String,
+    val photo604: String,
+    val graffitiAttachment: Graffiti = Graffiti(id, ownerId, photo130, photo604)
+) : Attachment
+
+data class Note(
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val text: String,
+    val date: Int,
+    val comments: Int,
+    val readComments: Int,
+    val viewUrl: String
+)
+
+data class NoteAttachment(
+    override val type: String = "note",
+    val id: Int,
+    val ownerId: Int,
+    val title: String,
+    val text: String,
+    val date: Int,
+    val comments: Int,
+    val readComments: Int,
+    val viewUrl: String,
+    val attachedNote: Note = Note(id, ownerId, title, text, date, comments, readComments, viewUrl)
+) : Attachment
+
+data class PostedPhoto(
+    val id: Int,
+    val ownerId: Int,
+    val photo130: String,
+    val photo604: String
+)
+
+data class PostedPhotoAttachment(
+    override val type: String = "posted_photo",
+    val id: Int,
+    val ownerId: Int,
+    val photo130: String,
+    val photo604: String,
+    val attachedPostedPhoto: PostedPhoto = PostedPhoto(
+        id, ownerId, photo130, photo604
+    )
+) : Attachment
+
 data class Post(
     val id: Long = 0L,
     val ownerId: Long = -1L,
@@ -27,6 +151,7 @@ data class Post(
     val markedAsAdds: Boolean = false,
     val isFavorite: Boolean = false,
     val postponedId: Long = -1L,
+    val attachments: Array<Attachment> = emptyArray<Attachment>()
 )
 
 
