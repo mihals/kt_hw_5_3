@@ -124,6 +124,12 @@ data class PostedPhotoAttachment(
     )
 ) : Attachment
 
+data class Comment(
+    val id: Long? = null, val postId: Long, val fromId: Int? = null, val date: Int? = null, val text: String,
+    val donat: Any? = null, val replyToUser: Int? = 0, val replyToComment: Int? = 0,
+    val attachment: Any? = null, val parentsStack: Array<Int>? = null, val thread: Any? = null
+)
+
 data class Post(
     val id: Long = 0L,
     val ownerId: Long = -1L,
@@ -159,6 +165,23 @@ class WallService {
     private var posts = emptyArray<Post>()
     private var id = 0L
 
+    private var comments = emptyArray<Comment>()
+    private var commentId = 0L
+
+    fun createComment(comment: Comment) {
+        for (value in posts) {
+            if (value.id == comment.postId) {
+                commentId++
+                val newComment = comment.copy(id = commentId)
+                comments += newComment
+                return
+            }
+        }
+
+        class PostNotFoundException(message: String = "postId $comment.postId not found") : RuntimeException(message)
+        throw PostNotFoundException()
+    }
+
     fun add(post: Post): Post {
         id++
         val myPost = post.copy(id = this.id)
@@ -178,5 +201,5 @@ class WallService {
 }
 
 fun main() {
-
+    //WallService.add()
 }
