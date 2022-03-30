@@ -33,4 +33,27 @@ class WallServiceTest {
 
         assertTrue(result)
     }
+
+    @Test
+    fun create_comment_successfully(){
+        val service = WallService()
+
+        service.add(Post())
+        service.add(Post())
+        service.add(Post())
+
+        val result=service.createComment(Comment(postId=2, text = "Two"))
+        assertTrue(result is Unit)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun create_comment_with_exception(){
+        val service = WallService()
+
+        service.add(Post())
+        service.add(Post())
+        service.add(Post())
+
+        service.createComment(Comment(postId=20, text = "Two"))
+    }
 }

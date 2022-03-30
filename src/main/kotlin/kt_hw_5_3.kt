@@ -160,8 +160,9 @@ data class Post(
     val attachments: Array<Attachment> = emptyArray<Attachment>()
 )
 
+class PostNotFoundException(message:String) : RuntimeException(message)
 
-object WallService {
+class WallService {
     private var posts = emptyArray<Post>()
     private var id = 0L
 
@@ -178,7 +179,7 @@ object WallService {
             }
         }
 
-        class PostNotFoundException(message:String) : RuntimeException(message)
+
         throw PostNotFoundException(message = "postId ${comment.postId} not found")
     }
 
@@ -201,10 +202,5 @@ object WallService {
 }
 
 fun main() {
-    WallService.add(Post())
-    WallService.add(Post())
-    WallService.add(Post())
 
-    WallService.createComment(Comment(postId=2, text = "Two"))
-    WallService.createComment((Comment(postId = 20, text = "Twenty")))
 }
