@@ -161,7 +161,7 @@ data class Post(
 )
 
 
-class WallService {
+object WallService {
     private var posts = emptyArray<Post>()
     private var id = 0L
 
@@ -178,8 +178,8 @@ class WallService {
             }
         }
 
-        class PostNotFoundException(message: String = "postId $comment.postId not found") : RuntimeException(message)
-        throw PostNotFoundException()
+        class PostNotFoundException(message:String) : RuntimeException(message)
+        throw PostNotFoundException(message = "postId ${comment.postId} not found")
     }
 
     fun add(post: Post): Post {
@@ -201,5 +201,10 @@ class WallService {
 }
 
 fun main() {
-    //WallService.add()
+    WallService.add(Post())
+    WallService.add(Post())
+    WallService.add(Post())
+
+    WallService.createComment(Comment(postId=2, text = "Two"))
+    WallService.createComment((Comment(postId = 20, text = "Twenty")))
 }
