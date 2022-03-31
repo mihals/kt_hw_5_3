@@ -161,7 +161,7 @@ class WallService {
 
     fun add(post: Post): Post {
         id++
-        val myPost = post.copy(id = this.id)
+        val myPost = post.copy(id = this.id, ownerId = post.ownerId, date = post.date)
         posts += myPost
         return posts.last()
     }
