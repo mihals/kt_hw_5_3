@@ -6,122 +6,75 @@ interface Attachment {
 }
 
 data class Audio(
-    val id: Int,
-    val ownerId: Int,
-    val artist: String,
-    val title: String,
-    val duration: Int,
-    val url: String,
-    val lyricsId: Int,
-    val albumId: Int,
-    val genreId: Int,
-    val date: Int,
-    val noSearch: Int,
-    val lsHq: Int
+    val id: Int?=null,
+    val ownerId: Int?=null,
+    val artist: String?=null,
+    val title: String?=null,
+    val duration: Int?=null,
+    val url: String?=null,
+    val lyricsId: Int?=null,
+    val albumId: Int?=null,
+    val genreId: Int?=null,
+    val date: Int?=null,
+    val noSearch: Int?=null,
+    val lsHq: Int?=null
 )
 
 data class AudioAttachment(
     override val type: String = "audio",
-    val id: Int,
-    val ownerId: Int,
-    val artist: String,
-    val title: String,
-    val duration: Int,
-    val url: String,
-    val lyricsId: Int,
-    val albumId: Int,
-    val genreId: Int,
-    val date: Int,
-    val noSearch: Int,
-    val lsHq: Int,
-    val audioAttachment: Audio = Audio(
-        id,
-        ownerId,
-        artist,
-        title,
-        duration,
-        url,
-        lyricsId,
-        albumId,
-        genreId,
-        date,
-        noSearch,
-        lsHq
-    )
+    val audioAttachment: Audio = Audio()
 ) : Attachment
 
 data class App(
-    val id: Int,
-    val name: String,
-    val photo130: String,
-    val photo604: String
+    val id: Int?=null,
+    val name: String?=null,
+    val photo130: String?=null,
+    val photo604: String?=null
 )
 
 data class AppAttachment(
     override val type: String = "app",
-    val id: Int,
-    val name: String,
-    val photo130: String,
-    val photo604: String,
-    val appAttachment: App = App(id, name, photo130, photo604)
+    val appAttachment: App = App()
 ) : Attachment
 
 data class Graffiti(
-    val id: Int,
-    val ownerId: Int,
-    val photo130: String,
-    val photo604: String
+    val id: Int?=null,
+    val ownerId: Int?=null,
+    val photo130: String?=null,
+    val photo604: String?=null
 )
 
 data class GraffitiAttachment(
     override val type: String = "graffiti",
-    val id: Int,
-    val ownerId: Int,
-    val photo130: String,
-    val photo604: String,
-    val graffitiAttachment: Graffiti = Graffiti(id, ownerId, photo130, photo604)
+    val graffitiAttachment: Graffiti = Graffiti()
 ) : Attachment
 
 data class Note(
-    val id: Int,
-    val ownerId: Int,
-    val title: String,
-    val text: String,
-    val date: Int,
-    val comments: Int,
-    val readComments: Int,
-    val viewUrl: String
+    val id: Int?=null,
+    val ownerId: Int?=null,
+    val title: String?=null,
+    val text: String?=null,
+    val date: Int?=null,
+    val comments: Int?=null,
+    val readComments: Int?=null,
+    val viewUrl: String?=null
 )
 
 data class NoteAttachment(
     override val type: String = "note",
-    val id: Int,
-    val ownerId: Int,
-    val title: String,
-    val text: String,
-    val date: Int,
-    val comments: Int,
-    val readComments: Int,
-    val viewUrl: String,
-    val attachedNote: Note = Note(id, ownerId, title, text, date, comments, readComments, viewUrl)
+    val attachedNote: Note = Note()
 ) : Attachment
 
 data class PostedPhoto(
-    val id: Int,
-    val ownerId: Int,
-    val photo130: String,
-    val photo604: String
+    val id: Int?=null,
+    val ownerId: Int?=null,
+    val photo130: String?=null,
+    val photo604: String?=null
 )
 
 data class PostedPhotoAttachment(
     override val type: String = "posted_photo",
-    val id: Int,
-    val ownerId: Int,
-    val photo130: String,
-    val photo604: String,
-    val attachedPostedPhoto: PostedPhoto = PostedPhoto(
-        id, ownerId, photo130, photo604
-    )
+    val attachedPostedPhoto: PostedPhoto = PostedPhoto()
 ) : Attachment
 
 data class Comment(
