@@ -1,5 +1,7 @@
 package ru.netology
 
+import javax.xml.crypto.Data
+
 data class Post(
     val id: Long = 0L,
     val ownerId: Long = -1L,
@@ -32,7 +34,7 @@ class WallService {
 
     fun add(post: Post): Post {
         id++
-        val myPost = post.copy(id = this.id, ownerId = post.ownerId, date = post.date)
+        val myPost = post.copy(id = this.id)
         posts += myPost
         return posts.last()
     }
@@ -40,7 +42,7 @@ class WallService {
     fun update(post: Post): Boolean {
         for ((index, value) in posts.withIndex()) {
             if (value.id == post.id) {
-                posts[index] = post.copy()
+                posts[index] = post.copy(ownerId = post.ownerId, date = post.date)
                 return true
             }
         }
